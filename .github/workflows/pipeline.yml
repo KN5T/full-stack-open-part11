@@ -1,9 +1,6 @@
 name: Deployment pipeline
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches: [main]
     types: [opened, synchronize]
@@ -35,6 +32,7 @@ jobs:
           wait-on: http://localhost:5000
 
       - name: Deploy app
+        if: ${{ github.event_name == 'push' }}
         uses: superfly/flyctl-actions/setup-flyctl@master
         run: flyctl deploy --remote-only
         env:
