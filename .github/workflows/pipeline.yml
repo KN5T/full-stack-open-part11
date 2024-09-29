@@ -39,3 +39,4 @@ jobs:
       - name: Deploy app
         if: ${{ github.event_name == 'push' }}
         uses: superfly/flyctl-actions/setup-flyctl@master
+        run: flyctl deploy --remote-only
