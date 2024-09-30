@@ -52,7 +52,7 @@ jobs:
     steps:
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' }}
-        uses: anothrNick/github-tag-action@latest
+        uses: anothrNick/github-tag-action@1.64.0
           DEFAULT_BUMP: patch
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DRY_RUN: true
