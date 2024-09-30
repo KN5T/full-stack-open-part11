@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  MESSAGE_STRING: ${{ join(github.event.commits.*.message) }}
+  MESSAGE_STRING: join(github.event.commits.*.message)
 
 jobs:
   a_test_job:
