@@ -6,8 +6,7 @@ on:
       - main
 
 env:
-  MESSAGE_STRING: join(github.event.commits.*.message)
-
+  MESSAGE_STRING: ${{ contains(join(github.event.commits.*.message), '#skip') }}
 
 jobs:
   a_test_job:
@@ -28,5 +27,5 @@ jobs:
         run: echo "$COMMIT_MESSAGES"
 
       - name: test "#skip"
-        if: ${{ contains(env.MESSAGE_STRING, 'skip') }}
+        if: ${{ env.MESSAGE_STRING == 'true' }}
         run: echo "there is a skip"
