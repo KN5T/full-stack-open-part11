@@ -8,6 +8,7 @@ on:
 env:
   MESSAGE_STRING: join(github.event.commits.*.message)
 
+
 jobs:
   a_test_job:
     runs-on: ubuntu-20.04
