@@ -31,15 +31,12 @@ jobs:
         run: npm run build
       
       - name: Discord failure notification
-        uses: stegzilla/discord-notify@v2
+        uses: rjstone/discord-webhook-notify@v1
         if: failure()
         with:
-          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
-          title: Build failed
-          message: "**${{ github.event.push.title }}**\n**Creator:** ${{ github.event.push.user.login }}\n${{ github.event.push.html_url }}"
-          include_image: true
-          avatar_url: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
-          username: GitHub PR Notifier
+            severity: info
+            details: Build failed
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: test
         run: npm test
@@ -61,16 +58,12 @@ jobs:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
       - name: Discord success notification
-        uses: stegzilla/discord-notify@v2
+        uses: rjstone/discord-webhook-notify@v1
         if: success()
         with:
-          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
-          title: A new version of Pokedex deployed
-          message: "**${{ github.event.push.title }}**\n**Creator:** ${{ github.event.push.user.login }}\n${{ github.event.push.html_url }}"
-          include_image: true
-          avatar_url: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
-          username: GitHub PR Notifier
-          
+            severity: info
+            details: A new version of Pokedex deployed
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   tag_release:
     needs: [simple_deployment_pipeline]
