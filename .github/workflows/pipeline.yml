@@ -29,16 +29,6 @@ jobs:
 
       - name: build
         run: npm run build
-      
-      - name: Discord failure notification
-        uses: rjstone/discord-webhook-notify@v1
-        if: success()
-        with:
-          severity: error
-          color: '#ff00aa'
-          description: commit ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }} by ${{ github.actor }} broke the build
-          text: Build failed
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: test
         run: npm test
@@ -59,12 +49,22 @@ jobs:
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
+      - name: Discord failure notification
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+          severity: error
+          color: '#d40d0d'
+          description: commit\n${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }} by ${{ github.actor }} broke the build
+          text: Build failed
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
       - name: Discord success notification
         uses: rjstone/discord-webhook-notify@v1
         if: success()
         with:
           severity: info
-          color: '#ff00aa'
+          color: '#02d417'
           description: to ${{ secrets.DEPLOYED_APP_URL}} by ${{ github.actor }}
           text: A new version of Pokedex deployed
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
