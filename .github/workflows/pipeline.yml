@@ -51,7 +51,7 @@ jobs:
 
       - name: Discord failure notification
         uses: rjstone/discord-webhook-notify@v1
-        if: success()
+        if: failure()
         with:
           severity: error
           color: '#d40d0d'
