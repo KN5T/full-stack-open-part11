@@ -36,7 +36,7 @@ jobs:
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
           title: Build failed
-          message: "**${{ github.event.pull_request.title }}**\n**Creator:** ${{ github.event.pull_request.user.login }}\n${{ github.event.pull_request.html_url }}"
+          message: "**${{ github.event.push.title }}**\n**Creator:** ${{ github.event.push.user.login }}\n${{ github.event.push.html_url }}"
           include_image: true
           avatar_url: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
           username: GitHub PR Notifier
@@ -66,7 +66,7 @@ jobs:
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
           title: A new version of Pokedex deployed
-          message: "**${{ github.event.pull_request.title }}**\n**Creator:** ${{ github.event.pull_request.user.login }}\n${{ github.event.pull_request.html_url }}"
+          message: "**${{ github.event.push.title }}**\n**Creator:** ${{ github.event.push.user.login }}\n${{ github.event.push.html_url }}"
           include_image: true
           avatar_url: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
           username: GitHub PR Notifier
