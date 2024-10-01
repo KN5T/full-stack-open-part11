@@ -55,7 +55,9 @@ jobs:
         with:
           severity: error
           color: '#d40d0d'
-          description: commit\n${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }} by ${{ github.actor }} broke the build
+          description: |
+            commit: 
+            ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }} by ${{ github.actor }} broke the build
           text: Build failed
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
