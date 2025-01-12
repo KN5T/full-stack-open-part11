@@ -63,7 +63,7 @@ jobs:
 
       - name: Discord success notification
         uses: rjstone/discord-webhook-notify@v1
-        if: success() && ${{ github.event_name == 'push' && env.SKIP_DEPLOYMENT == 'false' }}
+        if: ${{ success() && github.event_name == 'push' && env.SKIP_DEPLOYMENT == 'false' }}
         with:
           severity: info
           color: '#02d417'
@@ -73,7 +73,7 @@ jobs:
 
   tag_release:
     needs: [simple_deployment_pipeline]
-    if: ${{ github.event_name == 'push' && env.SKIP_DEPLOYMENT == 'false' }}
+    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
     runs-on: ubuntu-latest
     steps:
 
